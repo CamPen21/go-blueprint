@@ -1,7 +1,7 @@
 name: Linting Generated Blueprints
 
 on:
-  pull_request: {}
+  push:
   workflow_dispatch: {}
 
 jobs:
@@ -28,11 +28,11 @@ jobs:
       max-parallel: 1
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: ${{ matrix.goVersion }}
+      # - uses: actions/checkout@v4
+      # - name: Setup Go
+        # uses: actions/setup-go@v4
+        # with:
+        #   go-version: ${{ matrix.goVersion }}
       - name: build templates
         run: go run main.go create -n ${{ matrix.framework }} -f ${{ matrix.framework}}
       - name: golangci-lint
