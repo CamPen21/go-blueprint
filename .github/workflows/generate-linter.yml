@@ -26,7 +26,6 @@ jobs:
         framework:
           [chi, gin, fiber, gorilla/mux, httprouter, standard-library, echo]
         goVersion: ["1.20"]
-      max-parallel: 1
     steps:
       - uses: actions/checkout@v4
       # - name: Setup Go
