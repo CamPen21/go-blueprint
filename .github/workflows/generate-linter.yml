@@ -16,17 +16,17 @@ jobs:
       - name: Install Dependencies
         run: |
           go mod download
-          ls /dev/tty
 
   framework_matrix:
     needs: install_dependencies
+    runs-on: ubuntu-latest
     strategy:
       matrix:
+        os: [ubuntu-latest]
         framework:
           [chi, gin, fiber, gorilla/mux, httprouter, standard-library, echo]
         goVersion: ["1.20"]
       max-parallel: 1
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       # - name: Setup Go
@@ -35,7 +35,6 @@ jobs:
         #   go-version: ${{ matrix.goVersion }}
       - name: build templates
         run: |
-          ls -l
           go run main.go create -n ${{ matrix.framework }} -f ${{ matrix.framework}}
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
